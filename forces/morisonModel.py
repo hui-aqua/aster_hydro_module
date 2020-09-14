@@ -40,6 +40,15 @@ class forceModel:
         self.Sn = solidity
         self.hydroForces_Element = np.zeros((len(self.elements), 3))
 
+    def __str__(self):
+        s1="The model index is "+ str(self.modelIndex)+ "\n"
+        s2="In total, there are "+str(len(self.elements))+" hydrodynamic line elements. \n"
+        s3="The total force on the nettings are Fx="+str(sum(self.hydroForces_Element[:,0])) +"N\n" +  "Fy="+str(sum(self.hydroForces_Element[:,2])) +"N\n" +"Fz="+str(sum(self.hydroForces_Element[:,2])) +"N\n"      
+        
+        return s1+s2+s3
+        
+
+
     def output_hydro_element(self):
         """
         :return: [list] Unit: [-]. A list of indexes of the elements in the wake region.

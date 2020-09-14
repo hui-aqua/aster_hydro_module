@@ -41,8 +41,15 @@ class forceModel:
         self.dwh = dwh
         self.dw0 = dw0
         self.Sn = solidity
+        self.FEtime=0
         self.force_on_elements = np.zeros((len(self.hydro_element), 3))
-
+    def __str__(self):
+        s1="The model index is "+ str(self.modelIndex)+ "\n"
+        s2="In total, there are "+str(len(self.hydro_element))+" hydrodynamic triangular elements. \n"
+        s3="The total force on the nettings are Fx="+str(sum(self.force_on_elements[:,0])) +"N\n" + "Fy="+str(sum(self.force_on_elements[:,2])) +"N\n" +"Fz="+str(sum(self.force_on_elements[:,2])) +"N\n"      
+        
+        return s1+s2+s3
+        
     def output_hydro_element(self):
         """
         :return: [[list]] of the indexes of points in elements. e.g.:[[1,2,3],[2,3,4]...]
@@ -156,6 +163,7 @@ class forceModel:
         :param current_velocity: numpy array ([ux,uy,uz]), Unit [m/s]
         :return: [np.array].shape=(M,3) Unit [N]. The hydrodynamic forces on all M elements. Meanwhile, update the self.hydroForces_Element
         """
+        self.FEtime=fe_time
         wave_velocity = np.zeros((len(self.hydro_element), 3))
         if wave:
             for index, panel in enumerate(self.hydro_element):
