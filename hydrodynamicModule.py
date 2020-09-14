@@ -2,6 +2,8 @@ from forces import morisonModel as morisonModel
 from forces import screenModel as screenModel
 from weakEffects import weakModel as wakeModel
 import numpy as np
+import sys
+np.set_printoptions(threshold=sys.maxsize)
 
 row = 1025  # [kg/m3]   sea water density
 kinematic_viscosity = 1.004e-6  # when the water temperature is 20 degree.
@@ -13,6 +15,8 @@ morisonModel.dynamic_viscosity = dynamic_viscosity
 screenModel.row_fluid = row
 screenModel.kinematic_viscosity = kinematic_viscosity
 screenModel.dynamic_viscosity = dynamic_viscosity
+
+
 
 
 
@@ -46,6 +50,9 @@ def get_velocity_aster(table_aster):  # to get the velocity
     velocity_z = content.values()['DZ']
     velocity = np.array([velocity_x, velocity_y, velocity_z])
     return np.transpose(velocity)
+
+
+
 
 if __name__ == "__main__":
     # test code here
