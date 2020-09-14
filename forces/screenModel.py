@@ -28,13 +28,13 @@ class forceModel:
     In practice, the force is usually decomposed into two componnets: drag force F_D and lift force F_L (Cheng et al., 2020).
     """
 
-    def __init__(self, model_index, hydro_element, solidity, dwh=0.0, dw0=0.0):
+    def __init__(self, model_index, hydro_element, solidity, dw0=0.0,dwh=0.0):
         """
         :param model_index: [string] Unit: [-]. To indicate the model function, e.g.: 'S1', 'S2', 'S3'.
         :param hydro_element: [[list]] Unit: [-]. A python list to indicate how the net panel are connected. e.g.:[[p1,p2,p3][p2,p3,p4,p5]...]. If the input net panel contains 4 nodes, it will automaticly decomposed to 3 node net panel.
         :param solidity: [float] Unit: [-]. The solidity of netting.
-        :param dwh: [float] Unit: [m]. The hydrodynamic diameter of the numerical net twines. It is used for the force calculation (reference area)
         :param dw0: [float] Unit: [m]. The diameter of the physical net twines. It is used for the hydrodynamic coefficients.
+        :param dwh: [float] Unit: [m]. The hydrodynamic diameter of the numerical net twines. It is used for the force calculation (reference area)
         """
         self.modelIndex = str(model_index)
         self.hydro_element = convert_hydro_element(hydro_element)
