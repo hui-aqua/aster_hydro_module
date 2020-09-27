@@ -42,7 +42,7 @@ class net2netWeak:
         :param net_solidity: [float] Unit: [-]. The solidity of netting.
         """
         self.positions = np.array(node_initial_position)
-        self.elements = hydro_element
+        self.elements = index_convert(hydro_element)
         self.flow_direction = np.array(current_velocity) / np.linalg.norm(current_velocity)
         # np.array for incoming velocity to a cage
         self.origin = np.array(origin) - np.array(current_velocity) / np.linalg.norm(current_velocity) * (
@@ -143,7 +143,7 @@ class morisonModel:
         :param dwh: [float] Unit: [m]. The hydrodynamic diameter of the numerical net twines. It is used for the force calculation (reference area)
         """
         self.modelIndex = str(model_index)
-        self.elements = hydro_element  # the connections of the twines[[p1,p2][p2,p3]]
+        self.elements = index_convert(hydro_element)  # the connections of the twines[[p1,p2][p2,p3]]
         self.dwh = dwh  # used for the force calculation (reference area)
         self.dw0 = dw0  # used for the hydrodynamic coefficients
         self.Sn = solidity
@@ -257,7 +257,7 @@ class morisonModel:
             force_on_nodes[line[1]] += (self.force_on_elements[index]) / 2
         return force_on_nodes
 
-class screenModel():
+class screenModel:
     
     """
     For Morison hydrodynamic models, the forces on netting are calculated based on individual a panel section of netting.
@@ -553,7 +553,7 @@ def convert_hydro_element(elements):
     :return: [[list]] Unit: [-]. A list of indexes of elements only contain 3 nodes.
     """
     hydro_elements = []
-    for panel in elements:  # loop based on the hydrodynamic elements
+    for panel in index_convert(elements):  # loop based on the hydrodynamic elements
         if len([int(k) for k in set(panel)]) <= 3:  # the hydrodynamic element is a triangle
             hydro_elements.append([k for k in set([int(k) for k in set(panel)])])  # a list of the node sequence
         else:
@@ -623,6 +623,12 @@ def get_velocity_aster(table_aster):  # to get the velocity
     velocity = np.array([velocity_x, velocity_y, velocity_z])
     return np.transpose(velocity)
 
+def index_convert(input_connection):
+    out=input_connection
+    for i, con in enumerate(out):
+        for j in range(len(con)):
+            out[i][j]-=1
+    return out
 
 
 
