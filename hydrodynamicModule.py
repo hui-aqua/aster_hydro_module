@@ -426,6 +426,16 @@ class screenModel:
             fd = 0.5 * row * net_area * drag_coefficient * np.linalg.norm(velocity_relative) * velocity_relative
             fl = 0.5 * row * net_area * lift_coefficient * pow(np.linalg.norm(velocity_relative), 2) * lift_direction
             hydro_force_on_element.append((fd + fl) / 2.0)
+#test            # print("panel is "+str(panel))         
+#test            # print("area of panel is "+str(net_area))         
+#test            # print("density of water is "+str(row))         
+#test            # print("drag_coefficient is "+str(drag_coefficient))         
+#test            # print("lift_coefficient is "+str(lift_coefficient))         
+#test            # print("velocity_relative "+str(velocity_relative))         
+#test            # print("fd is "+str(fd))         
+#test            # print("fl is "+str(fl))         
+#test            # print("fh is "+str((fd + fl) / 2.0))         
+
         if np.size(np.array(hydro_force_on_element)) == np.size(self.hydro_element):
             self.force_on_elements = np.array(hydro_force_on_element)
             return np.array(hydro_force_on_element)
