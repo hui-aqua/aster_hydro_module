@@ -7,7 +7,7 @@
 -------------------------------------------\n
 Any questions about this code,
 please email: hui.cheng@uis.no \n
-Modules can be used to calculate the hydrodynamic forces on nets.
+Modules can be used to calculate the hydrodynamic and hydrostatic forces on nets.
 In order to use this module, we recommend ``import screenModel as sm`` in the beginning of your code.
 Please refer to Cheng et al. (2020) [https://doi.org/10.1016/j.aquaeng.2020.102070] for details.
 # In the present program, the nodes' position is stored as numpy array not a python list for easier manipulation.
