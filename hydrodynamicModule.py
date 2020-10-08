@@ -469,7 +469,6 @@ class screenModel:
             p3 = realtime_node_position[panel[2]]
             alpha, lift_direction, surface_area = calculation_on_element(p1, p2, p3, velocity_on_element[index])
             drag_coefficient, lift_coefficient = self.hydro_coefficients(alpha, velocity_on_element[index], knot=False)
-
             velocity_fluid = velocity_on_element[index] * np.sqrt(2.0 / (2.0 - drag_coefficient - lift_coefficient))
             velocity_structure = (velocity_of_nodes[panel[0]] + velocity_of_nodes[panel[1]] + velocity_of_nodes[
                 panel[2]]) / (len(panel))
@@ -551,7 +550,6 @@ def calculation_on_element(point1, point2, point3, velocity):
     surface_area = 0.5 * np.linalg.norm(np.cross(a1 * ba1, a2 * ba2))
     lift_vector = np.cross(np.cross(velocity, normal_vector), velocity) / \
                   np.linalg.norm(np.cross(np.cross(velocity, normal_vector), velocity) + 0.000000001)
-
     coin_alpha = abs(np.dot(normal_vector, velocity) / np.linalg.norm(velocity))
     alpha = np.arccos(coin_alpha)
     return alpha, lift_vector, surface_area
